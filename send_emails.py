@@ -26,7 +26,10 @@ def send_email(send_from, send_to, subject, text):
 # inputs
 project_dir = os.getcwd() + "/"
 now = datetime.datetime.now()
-today = now.strftime("%Y%m%d")
+if len(sys.argv) > 1:
+  today = sys.argv[1]
+else:
+  today = now.strftime("%Y%m%d")
 
 sys.stdout.write("Reading in predictions/metrics...\n")
 sys.stdout.flush()
@@ -40,8 +43,8 @@ sys.stdout.write("Sending emails...\n")
 sys.stdout.flush()
 send_from = "d.michael.donohue@gmail.com"
 send_to = ["d.michael.donohue@gmail.com"]
-subject = "NBA Predictions %s" % now.strftime("%m-%d-%Y")
-text = "Predictions for games happening on %s (all times Eastern): <br><br>" % now.strftime("%m-%d-%Y")
+subject = "NBA Predictions %s" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
+text = "Predictions for games happening on %s (all times Eastern): <br><br>" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
 text += predictions.to_html()
 text += "<br> Notes:"
 text += "<ul><li> Spread is from the perspective of the home team, e.g., -4 means the home team is predicted to lose by 4.</li>"

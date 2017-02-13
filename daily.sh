@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-echo "Preparing data..."
+set -e
+
+echo "Fetching most recent historical data..."
+aws s3 sync s3://donohue/nba/data/ data/ 2>&1
+
+echo "Preparing new data..."
 ./prepare_data.py 2>&1
 
 echo "Training models and making predictions..."
