@@ -48,10 +48,8 @@ ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
 ML.train()
 ml_acc = ML.cv_score()
 
-# predict on today's games/merge with historical predictions
+# predict on today's games
 matchups = pd.read_json(project_dir + "resources/%s.json" % today, lines=True)
-
-# make predictions
 predictions = []
 for _, row in matchups.iterrows():
   date = row.get("date")
@@ -71,7 +69,7 @@ pred_df = pd.DataFrame(predictions,
   columns=["date", "home_team", "away_team", "spread", "total", "moneyline", "away_prob", "home_prob"])
 metric_df = pd.DataFrame({"spread_mae": [sr_mae], "total_mae": [tr_mae], "ml_acc": [ml_acc]})
 pred_df.to_csv(project_dir + "resources/predictions_%s.csv" % today, index=False)
+metric_df.to_csv(project_dir + "data/metrics.csv", index=False)
 
-if len(sys.argv) == 1: # running daily, so append to historical predictions and save metrics
+if len(sys.argv) == 1: # running daily, so append to historical predictions
   pred_df.to_csv(project_dir + "data/predictions.csv", header=False, mode="a", index=False)
-  metric_df.to_csv(project_dir + "data/metrics.csv", index=False)
