@@ -1,4 +1,5 @@
 Scraper example usage:
+
 To get all games in May 2008
 `scrapy crawl boxscore -a season=2008 -a month=may --set FEED_URI=data/may-2008.json --set FEED_FORMAT=jsonlines` 
 or to get all games on January 29th, 2017
