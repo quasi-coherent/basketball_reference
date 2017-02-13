@@ -3,6 +3,7 @@
 set -e
 
 echo "Fetching most recent historical data..."
+mv data/* tmp/
 aws s3 sync s3://donohue/nba/data/ data/ 2>&1
 
 echo "Preparing new data..."
