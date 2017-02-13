@@ -2,6 +2,7 @@
 import datetime
 import os
 import subprocess
+import sys
 import pandas as pd
 
 def launch_spider(spider_name, season, month, today, project_dir, data_dir):
