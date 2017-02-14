@@ -2,8 +2,8 @@
 
 set -e
 
-echo "Fetching most recent historical data..."
-mv data/* tmp/
+echo "Archiving data directory and syncing with s3..."
+for f in `ls data`; do mv data/$f archive/`date +%Y%m%d`_$f; done
 aws s3 sync s3://donohue/nba/data/ data/ 2>&1
 
 echo "Preparing new data..."

@@ -9,6 +9,10 @@ if [ $# -eq 0 ]
   exit;
 fi
 
+if [[ $1 != [0-9][0-9][0-9][0-9][0-1][0-9][0-3][0-9] ]]
+  then echo "Date format is not yyyymmdd..."
+fi
+
 echo "Fetching most recent historical data..."
 aws s3 sync s3://donohue/nba/data/ data/ 2>&1
 
