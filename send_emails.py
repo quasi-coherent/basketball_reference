@@ -44,8 +44,8 @@ if __name__ == "__main__":
   sys.stdout.flush()
   send_from = "d.michael.donohue@gmail.com"
   send_to = ["d.michael.donohue@gmail.com"]
-  subject = "NBA Predictions %s" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
-  text = "Predictions for games happening on %s (all times Eastern): <br><br>" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
+  subject = "NBA Predictions %s" % datetime.datetime.strptime(today, "%Y%m%d").strftime("%m-%d-%Y")
+  text = "Predictions for games happening on %s (all times Eastern): <br><br>" % datetime.datetime.strptime(today, "%Y%m%d").strftime("%m-%d-%Y")
   text += predictions.to_html()
   text += "<br> Notes:"
   text += "<ul><li> Spread is from the perspective of the home team, e.g., -4 means the home team is predicted to lose by 4.</li>"
