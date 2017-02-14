@@ -12,7 +12,6 @@ from models.spread_and_total import SpreadAndTotalRegressor
 from models.params import GBT_PARAMS
 
 # inputs
-s3_uri = "s3://donohue/nba/"
 project_dir = os.getcwd() + "/"
 now = datetime.datetime.now()
 if len(sys.argv) > 1:

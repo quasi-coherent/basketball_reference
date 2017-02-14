@@ -2,9 +2,8 @@
 
 set -e
 
-echo "Archiving data directory and syncing with s3..."
+echo "Archiving data directory..."
 for f in `ls data`; do mv data/$f archive/`date +%Y%m%d`_$f; done
-aws s3 sync s3://donohue/nba/data/ data/ 2>&1
 
 echo "Preparing new data..."
 ./prepare_data.py 2>&1
