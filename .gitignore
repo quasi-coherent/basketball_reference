@@ -1,3 +1,4 @@
 *.pyc
+*_grid_search.py
 .DS_Store
 bootstrap.sh
