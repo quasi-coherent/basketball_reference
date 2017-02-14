@@ -23,36 +23,37 @@ def send_email(send_from, send_to, subject, text):
   smtp.sendmail(send_from, send_to, msg.as_string())
   smtp.close()
 
-# inputs
-project_dir = os.getcwd() + "/"
-now = datetime.datetime.now()
-if len(sys.argv) > 1:
-  today = sys.argv[1]
-else:
-  today = now.strftime("%Y%m%d")
+if __name__ == "__main__":
+  # inputs
+  project_dir = os.getcwd() + "/"
+  now = datetime.datetime.now()
+  if len(sys.argv) > 1:
+    today = sys.argv[1]
+  else:
+    today = now.strftime("%Y%m%d")
 
-sys.stdout.write("Reading in predictions/metrics...\n")
-sys.stdout.flush()
-predictions = pd.read_csv(project_dir + "resources/predictions_%s.csv" % today)
-predictions["date"] = pd.to_datetime(predictions["date"])
-predictions = predictions.sort_values(by="date")
-metrics = pd.read_csv(project_dir + "data/metrics.csv")
+  sys.stdout.write("Reading in predictions/metrics...\n")
+  sys.stdout.flush()
+  predictions = pd.read_csv(project_dir + "resources/predictions_%s.csv" % today)
+  predictions["date"] = pd.to_datetime(predictions["date"])
+  predictions = predictions.sort_values(by="date")
+  metrics = pd.read_csv(project_dir + "data/metrics.csv")
 
-# send email with predictions/historical metrics
-sys.stdout.write("Sending emails...\n")
-sys.stdout.flush()
-send_from = "d.michael.donohue@gmail.com"
-send_to = ["d.michael.donohue@gmail.com"]
-subject = "NBA Predictions %s" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
-text = "Predictions for games happening on %s (all times Eastern): <br><br>" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
-text += predictions.to_html()
-text += "<br> Notes:"
-text += "<ul><li> Spread is from the perspective of the home team, e.g., -4 means the home team is predicted to lose by 4.</li>"
-text += "<li> A '1' in the moneyline column means that the home team is predicted to win; '0' means they are predicted to lose.</li></ul>"
-text += "Historical model metrics:<br><br>"
-text += metrics.to_html()
-text += "<br>Disclaimers:"
-text += "<ul><li>This doesn't take into account injuries, schedule oddities (e.g., back-to-back, long road trips, etc.).</li>"
-text += "<li>Use this only as a rough guide and a supplement to personal research.</li></ul>"
+  # send email with predictions/historical metrics
+  sys.stdout.write("Sending emails...\n")
+  sys.stdout.flush()
+  send_from = "d.michael.donohue@gmail.com"
+  send_to = ["d.michael.donohue@gmail.com"]
+  subject = "NBA Predictions %s" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
+  text = "Predictions for games happening on %s (all times Eastern): <br><br>" % today.strptime("%Y%m%d").strftime("%m-%d-%Y")
+  text += predictions.to_html()
+  text += "<br> Notes:"
+  text += "<ul><li> Spread is from the perspective of the home team, e.g., -4 means the home team is predicted to lose by 4.</li>"
+  text += "<li> A '1' in the moneyline column means that the home team is predicted to win; '0' means they are predicted to lose.</li></ul>"
+  text += "Historical model metrics:<br><br>"
+  text += metrics.to_html()
+  text += "<br>Disclaimers:"
+  text += "<ul><li>This doesn't take into account injuries, schedule oddities (e.g., back-to-back, long road trips, etc.).</li>"
+  text += "<li>Use this only as a rough guide and a supplement to personal research.</li></ul>"
 
-send_email(send_from=send_from, send_to=send_to, subject=subject, text=text)
+  send_email(send_from=send_from, send_to=send_to, subject=subject, text=text)
