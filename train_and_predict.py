@@ -9,7 +9,7 @@ from sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifi
 from models.moneyline import MoneylineClassifier
 from models.preprocess import PreprocessBoxscore
 from models.spread_and_total import SpreadAndTotalRegressor
-from models.params import GBT_PARAMS
+from models.params import *
 
 # inputs
 project_dir = os.getcwd() + "/"
@@ -27,23 +27,23 @@ pp = PreprocessBoxscore(path, season)
 # re-train models on historical boxscores + yesterday's boxscores
 # and get historical performance
 X_spread, y_spread = pp.spread()
-GBR_spread = GradientBoostingRegressor(**GBT_PARAMS)
+GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
   model=GBR_spread)
 SR.train()
 sr_mae = -1*SR.cv_score()
 
 X_total, y_total = pp.total()
-GBR_total = GradientBoostingRegressor(**GBT_PARAMS)
+GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
   model=GBR_total)
 TR.train()
 tr_mae = -1*TR.cv_score()
 
 X_moneyline, y_moneyline = pp.moneyline()
-GBC = GradientBoostingClassifier(**GBT_PARAMS)
+GBC_moneyline = GradientBoostingClassifier(**MONEYLINE_PARAMS)
 ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
-  model=GBC)
+  model=GBC_moneyline)
 ML.train()
 ml_acc = ML.cv_score()
 

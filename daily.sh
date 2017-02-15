@@ -3,7 +3,7 @@
 set -e
 
 echo "Archiving data directory..."
-for f in `ls data`; do cp data/$f archive/`date +%Y%m%d`_$f; done
+for f in `ls data`; do cp data/$f archive/`date +'%Y%m%d' --date='-2 days'`_$f; done
 
 echo "Preparing new data..."
 ./prepare_data.py 2>&1

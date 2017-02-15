@@ -36,7 +36,7 @@ if __name__ == "__main__":
   sys.stdout.flush()
   predictions = pd.read_csv(project_dir + "resources/predictions_%s.csv" % today)
   predictions["date"] = pd.to_datetime(predictions["date"])
-  predictions = predictions.sort_values(by="date")
+  predictions = predictions.sort_values(by="date").reset_index()
   metrics = pd.read_csv(project_dir + "data/metrics.csv")
 
   # send email with predictions/historical metrics
