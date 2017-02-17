@@ -14,7 +14,7 @@ class MoneylineClassifier(object):
     return clf.best_params_
 
   def cv_score(self, n_folds=10):
-    score = cross_val_score(self.model, self.features, self.response)
+    score = cross_val_score(self.model, self.features, self.response, n_jobs=-1)
     return score.mean()
 
   def train(self):

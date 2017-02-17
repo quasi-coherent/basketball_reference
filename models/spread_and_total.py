@@ -15,7 +15,8 @@ class SpreadAndTotalRegressor(object):
 
   def cv_score(self, n_folds=10):
     score = cross_val_score(self.model, self.features, self.response, 
-      cv=n_folds, scoring=make_scorer(mean_absolute_error, greater_is_better=False))
+      cv=n_folds, scoring=make_scorer(mean_absolute_error, greater_is_better=False),
+      n_jobs=-1)
     return score.mean()
 
   def train(self):

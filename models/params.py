@@ -27,3 +27,31 @@ MONEYLINE_PARAMS = {
   "max_depth": 2, 
   "min_samples_leaf": 12
   } # 10-fold cv acc = 0.95692757982276833
+
+# MONEYLINE_PARAMS = {
+#   'n_estimators': 1250, 
+#   'learning_rate': 0.077499999999999999, 
+#   'max_depth': 2, 
+#   'min_samples_leaf': 6
+#   }
+
+# SPREAD_PARAMS2 = {
+#   'n_estimators': 2000, 
+#   'learning_rate': 0.10000000000000001, 
+#   'max_depth': 2, 
+#   'min_samples_leaf': 12
+#   }
+
+# TOTAL_PARAMS2 = {
+#   'n_estimators': 1500, 
+#   'learning_rate': 0.10000000000000001, 
+#   'max_depth': 6, 
+#   'min_samples_leaf': 3
+#   } # 10-fold cv mae = 6.7273007001488194
+
+# TOTAL_PARAMS3 = {
+#   'n_estimators': 2000, 
+#   'learning_rate': 0.10000000000000001, 
+#   'max_depth': 4, 
+#   'min_samples_leaf': 3
+#   } # 10-fold cv: mae = 6.6539591890139587

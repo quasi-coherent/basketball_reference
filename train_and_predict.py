@@ -31,21 +31,21 @@ GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
   model=GBR_spread)
 SR.train()
-sr_mae = -1*SR.cv_score()
+sr_mae = -1*SR.cv_score(n_folds=3)
 
 X_total, y_total = pp.total()
 GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
   model=GBR_total)
 TR.train()
-tr_mae = -1*TR.cv_score()
+tr_mae = -1*TR.cv_score(n_folds=3)
 
 X_moneyline, y_moneyline = pp.moneyline()
 GBC_moneyline = GradientBoostingClassifier(**MONEYLINE_PARAMS)
 ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
   model=GBC_moneyline)
 ML.train()
-ml_acc = ML.cv_score()
+ml_acc = ML.cv_score(n_folds=3)
 
 # predict on today's games
 matchups = pd.read_json(project_dir + "resources/%s.json" % today, lines=True)
