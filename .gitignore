@@ -2,4 +2,5 @@
 *_grid_search.py
 .DS_Store
 bootstrap.sh
+generate_inputs.py
 1MB.dat
