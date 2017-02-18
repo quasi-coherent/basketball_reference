@@ -25,7 +25,7 @@ echo "Training models and making predictions..."
 echo "Sending emails..."
 ./send_emails.py $1 2>&1
 
-echo "Cleaning up directories..."
+echo "Cleaning up resources..."
 rm resources/*
 
 echo "Done!"

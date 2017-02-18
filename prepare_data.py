@@ -29,6 +29,8 @@ if __name__ == "__main__":
   if len(sys.argv) > 1: # doing a one-off for a game in the future
     today = sys.argv[1]
     month_today = datetime.strptime(today, "%Y%m%d").strftime("%B").lower()
+    sys.stdout.write("Scraping games on %s...\n" % today)
+    sys.stdout.flush()
     launch_spider(spider_name="upcoming_games",
       season=season, month=month_today, today=today,
       project_dir=project_dir, 
@@ -40,6 +42,8 @@ if __name__ == "__main__":
     # scrape last month's data if today is the start
     # of a new month, for archiving
     if month_today != month_yesterday:
+      sys.stdout.write("Scraping last month's data for archiving...\n")
+      sys.stdout.flush()
       subprocess.call(["scrapy", "crawl", "advanced_boxscore", 
           "-a", "season=%s" % season, 
           "-a", "month=%s" % month_yesterday,
@@ -51,18 +55,24 @@ if __name__ == "__main__":
         s3_uri + "archive/"])
 
     # scrape yesterday's results
+    sys.stdout.write("Scraping yesterday's games...\n")
+    sys.stdout.flush()
     launch_spider(spider_name="advanced_boxscore", 
       season=season, month=month_yesterday, today=yesterday,
       project_dir=project_dir,
       data_dir="resources/")
 
     # scrape today's matchups
+    sys.stdout.write("Scraping today's matchups...\n")
+    sys.stdout.flush()
     launch_spider(spider_name="upcoming_games",
       season=season, month=month_today, today=today,
       project_dir=project_dir, 
       data_dir="resources/")
 
     # merge yesterday's scores with historical scores
+    sys.stdout.write("Appending yesterday's scores to historical scores...\n")
+    sys.stdout.flush()
     all_df = pd.read_json(project_dir + "data/" + all_boxscores, lines=True)
     yesterday_df = pd.read_json(project_dir + "resources/%s.json" % yesterday, lines=True)
     merged = pd.concat([all_df, yesterday_df])

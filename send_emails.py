@@ -32,6 +32,7 @@ if __name__ == "__main__":
   else:
     today = now.strftime("%Y%m%d")
 
+  # read in and prepare prediction/metrics dfs
   sys.stdout.write("Reading in predictions/metrics...\n")
   sys.stdout.flush()
   predictions = pd.read_csv(project_dir + "resources/predictions_%s.csv" % today)
@@ -40,8 +41,6 @@ if __name__ == "__main__":
   metrics = pd.read_csv(project_dir + "data/metrics.csv")
 
   # send email with predictions/historical metrics
-  sys.stdout.write("Sending emails...\n")
-  sys.stdout.flush()
   send_from = "d.michael.donohue@gmail.com"
   send_to = ["d.michael.donohue@gmail.com"]
   subject = "NBA Predictions %s" % datetime.datetime.strptime(today, "%Y%m%d").strftime("%m-%d-%Y")
@@ -57,3 +56,5 @@ if __name__ == "__main__":
   text += "<li>Use this only as a rough guide and a supplement to personal research.</li></ul>"
 
   send_email(send_from=send_from, send_to=send_to, subject=subject, text=text)
+  sys.stdout.write("Emails sent...\n")
+  sys.stdout.flush()

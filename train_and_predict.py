@@ -26,6 +26,8 @@ pp = PreprocessBoxscore(path, season)
 
 # re-train models on historical boxscores + yesterday's boxscores
 # and get historical performance
+sys.stdout.write("Training spread regressor...\n")
+sys.stdout.flush()
 X_spread, y_spread = pp.spread()
 GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
@@ -33,6 +35,8 @@ SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread,
 SR.train()
 sr_mae = -1*SR.cv_score(n_folds=3)
 
+sys.stdout.write("Training total regressor...\n")
+sys.stdout.flush()
 X_total, y_total = pp.total()
 GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
@@ -40,6 +44,8 @@ TR = SpreadAndTotalRegressor(features=X_total, response=y_total,
 TR.train()
 tr_mae = -1*TR.cv_score(n_folds=3)
 
+sys.stdout.write("Training moneyline classifier...\n")
+sys.stdout.flush()
 X_moneyline, y_moneyline = pp.moneyline()
 GBC_moneyline = GradientBoostingClassifier(**MONEYLINE_PARAMS)
 ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
@@ -48,6 +54,8 @@ ML.train()
 ml_acc = ML.cv_score(n_folds=3)
 
 # predict on today's games
+sys.stdout.write("Predicting on today's games...\n")
+sys.stdout.flush()
 matchups = pd.read_json(project_dir + "resources/%s.json" % today, lines=True)
 predictions = []
 for _, row in matchups.iterrows():
@@ -64,6 +72,8 @@ for _, row in matchups.iterrows():
   predictions.append([date, home_team, away_team, sr_pred, tr_pred, ml_pred, ml_pred_prob[0], ml_pred_prob[1]])
 
 # write to files
+sys.stdout.write("Writing out predictions/metrics...\n")
+sys.stdout.flush()
 pred_df = pd.DataFrame(predictions, 
   columns=["date", "home_team", "away_team", "spread", "total", "moneyline", "away_prob", "home_prob"])
 metric_df = pd.DataFrame({"spread_mae": [sr_mae], "total_mae": [tr_mae], "ml_acc": [ml_acc]})
