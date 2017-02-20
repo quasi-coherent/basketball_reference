@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -e -x 
 
 echo "Archiving data directory..."
 for f in `ls data`; do cp data/$f archive/`date +'%Y%m%d' --date='-2 days'`_$f; done
@@ -16,8 +16,6 @@ echo "Sending emails..."
 
 echo "Syncing data directories..."
 aws s3 sync data/ s3://donohue/nba/data/ 2>&1
-
-echo "Cleaning up resources..."
-rm resources/*
+aws s3 sync archive/ s3://donohue/nba/archive/snapshot/ 2>&1
 
 echo "Done!"

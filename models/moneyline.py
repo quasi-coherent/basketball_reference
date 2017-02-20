@@ -1,5 +1,4 @@
 from sklearn.model_selection import cross_val_score, GridSearchCV
-from sklearn.metrics import make_scorer
 
 class MoneylineClassifier(object):
   def __init__(self, features, response, model):

@@ -33,6 +33,7 @@ GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
   model=GBR_spread)
 SR.train()
+sr_r2 = SR.cv_score(n_folds=3)
 sr_mae = -1*SR.cv_score(n_folds=3)
 
 sys.stdout.write("Training total regressor...\n")
@@ -42,6 +43,7 @@ GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
   model=GBR_total)
 TR.train()
+tr_r2 = TR.cv_score(n_folds=3)
 tr_mae = -1*TR.cv_score(n_folds=3)
 
 sys.stdout.write("Training moneyline classifier...\n")
@@ -76,7 +78,10 @@ sys.stdout.write("Writing out predictions/metrics...\n")
 sys.stdout.flush()
 pred_df = pd.DataFrame(predictions, 
   columns=["date", "home_team", "away_team", "spread", "total", "moneyline", "away_prob", "home_prob"])
-metric_df = pd.DataFrame({"spread_mae": [sr_mae], "total_mae": [tr_mae], "ml_acc": [ml_acc]})
+metric_df = pd.DataFrame(
+  {"spread_r2": [sr_r2], "spread_mae": [sr_mae], 
+  "total_mae": [tr_mae], "total_r2": [tr_r2], 
+  "ml_acc": [ml_acc]})
 pred_df.to_csv(project_dir + "resources/predictions_%s.csv" % today, index=False)
 metric_df.to_csv(project_dir + "data/metrics.csv", index=False)
 

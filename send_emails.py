@@ -12,14 +12,14 @@ from email.mime.text import MIMEText
 def send_email(send_from, send_to, subject, text):
   assert isinstance(send_to, list)
   msg = MIMEMultipart()
-  msg['From'] = send_from
-  msg['To'] = COMMASPACE.join(send_to)
-  msg['Date'] = formatdate(localtime=True)
-  msg['Subject'] = subject
-  msg.attach(MIMEText(text, 'html'))
-  smtp = smtplib.SMTP(os.environ['SMTP_ENDPOINT'], int(os.environ['SMTP_PORT']))
+  msg["From"] = send_from
+  msg["To"] = COMMASPACE.join(send_to)
+  msg["Date"] = formatdate(localtime=True)
+  msg["Subject"] = subject
+  msg.attach(MIMEText(text, "html"))
+  smtp = smtplib.SMTP(os.environ["SMTP_ENDPOINT"], int(os.environ["SMTP_PORT"]))
   smtp.starttls()
-  smtp.login(os.environ['SMTP_USER'], os.environ['SMTP_PASS'])
+  smtp.login(os.environ["SMTP_USER"], os.environ["SMTP_PASS"])
   smtp.sendmail(send_from, send_to, msg.as_string())
   smtp.close()
 

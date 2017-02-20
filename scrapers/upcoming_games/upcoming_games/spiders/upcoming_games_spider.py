@@ -23,9 +23,9 @@ class UpcomingGamesSpider(Spider):
         item = UpcomingGamesItem()
         time = soup.find("td", attrs={"data-stat": "game_start_time"}).text
         date_time = " ".join([date, time])
-        item['date'] = date_time
-        item['home_team'] = soup.find("td", attrs={"data-stat": "home_team_name"}).text
-        item['away_team'] = soup.find("td", attrs={"data-stat": "visitor_team_name"}).text
+        item["date"] = date_time
+        item["home_team"] = soup.find("td", attrs={"data-stat": "home_team_name"}).text
+        item["away_team"] = soup.find("td", attrs={"data-stat": "visitor_team_name"}).text
         yield item
       else:
         continue
