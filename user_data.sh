@@ -15,4 +15,4 @@ echo "export SMTP_PASS='AmuZFyh/kL5l1lunYlVA3DNX1eWUGj0Eii9UMYFrthP0'" >> /home/
 source /home/ubuntu/.profile
 cd /home/ubuntu/basketball_reference/
 ./daily.sh
-shutdown -h now
+aws ec2 terminate-instances --instance-ids `ec2metadata --instance-id`
