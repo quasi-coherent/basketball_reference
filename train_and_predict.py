@@ -78,10 +78,7 @@ sys.stdout.write("Writing out predictions/metrics...\n")
 sys.stdout.flush()
 pred_df = pd.DataFrame(predictions, 
   columns=["date", "home_team", "away_team", "spread", "total", "moneyline", "away_prob", "home_prob"])
-metric_df = pd.DataFrame(
-  {"spread_r2": [sr_r2], "spread_mae": [sr_mae], 
-  "total_mae": [tr_mae], "total_r2": [tr_r2], 
-  "ml_acc": [ml_acc]})
+metric_df = pd.DataFrame({"spread_mae": [sr_mae], "total_mae": [tr_mae], "ml_acc": [ml_acc]})
 pred_df.to_csv(project_dir + "resources/predictions_%s.csv" % today, index=False)
 metric_df.to_csv(project_dir + "data/metrics.csv", index=False)
 
