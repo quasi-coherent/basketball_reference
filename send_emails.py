@@ -36,6 +36,10 @@ if __name__ == "__main__":
   sys.stdout.write("Reading in predictions/metrics...\n")
   sys.stdout.flush()
   predictions = pd.read_csv(project_dir + "resources/predictions_%s.csv" % today)
+  if predictions.shape[0] == 0:
+    sys.stdout.write("No games today...\n")
+    sys.stdout.flush()
+    sys.exit(0)
   predictions["date"] = pd.to_datetime(predictions["date"])
   predictions = predictions.sort_values(by="date").reset_index()
   metrics = pd.read_csv(project_dir + "data/metrics.csv")

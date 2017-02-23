@@ -7,7 +7,6 @@ pip install scrapy bs4 pandas numpy scipy scikit-learn
 aws s3 cp --recursive s3://donohue/nba/project/ /home/ubuntu/
 aws s3 sync s3://donohue/nba/data/ /home/ubuntu/basketball_reference/data/
 chmod 700 /home/ubuntu/basketball_reference/*.py /home/ubuntu/basketball_reference/*.sh
-chown -R ubuntu /home/ubuntu/basketball_reference/
 echo "export SMTP_ENDPOINT='email-smtp.us-east-1.amazonaws.com'" >> /home/ubuntu/.profile
 echo "export SMTP_PORT=587" >> /home/ubuntu/.profile
 echo "export SMTP_USER='AKIAIHBIB5SQUWF77FUQ'" >> /home/ubuntu/.profile
