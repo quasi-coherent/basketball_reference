@@ -14,8 +14,9 @@ echo "Training models and making predictions..."
 echo "Sending emails..."
 ./send_emails.py 2>&1
 
-echo "Syncing data directories..."
+echo "Syncing directories with s3..."
 aws s3 sync data/ s3://donohue/nba/data/ 2>&1
 aws s3 sync archive/ s3://donohue/nba/archive/snapshot/ 2>&1
+aws s3 sync . s3://donohue/nba/project/basketball_reference/ --exclude "*.pyc" 2>&1
 
 echo "Done!"
