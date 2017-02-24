@@ -33,7 +33,6 @@ GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
   model=GBR_spread)
 SR.train()
-sr_r2 = SR.cv_score(n_folds=3)
 sr_mae = -1*SR.cv_score(n_folds=3)
 
 sys.stdout.write("Training total regressor...\n")
@@ -43,7 +42,6 @@ GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
   model=GBR_total)
 TR.train()
-tr_r2 = TR.cv_score(n_folds=3)
 tr_mae = -1*TR.cv_score(n_folds=3)
 
 sys.stdout.write("Training moneyline classifier...\n")
