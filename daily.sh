@@ -19,4 +19,7 @@ aws s3 sync data/ s3://donohue/nba/data/ 2>&1
 aws s3 sync archive/ s3://donohue/nba/archive/snapshot/ 2>&1
 aws s3 sync . s3://donohue/nba/project/basketball_reference/ --exclude "*.pyc" 2>&1
 
+echo "Logging..."
+aws s3 cp /var/log/cloud-init-output.log s3://donohue/nba/log/`date +%Y-%m-%d`.log
+
 echo "Done!"
