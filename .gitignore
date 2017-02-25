@@ -1,3 +1,4 @@
 *.pyc
+.empty
 .DS_Store
 1MB.dat
