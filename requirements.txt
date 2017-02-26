@@ -1,0 +1,6 @@
+scrapy
+bs4
+pandas
+numpy
+scipy
+scikit-learn
