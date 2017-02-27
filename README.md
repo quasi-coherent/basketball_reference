@@ -1,3 +1,5 @@
+`pip install -r requirements.txt`
+
 Scraper example usage:
 
 To get all games in May 2008
