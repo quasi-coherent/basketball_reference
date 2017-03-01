@@ -51,7 +51,7 @@ if __name__ == "__main__":
           "--set", "FEED_FORMAT=jsonlines"],
         cwd=project_dir + "scrapers/advanced_boxscore/")
       subprocess.call(["aws", "s3", "cp", 
-        project_dir + "resources/" + season + "_" + month_yesterday + ".json", 
+        project_dir + "resources/" + str(season) + "_" + month_yesterday + ".json", 
         s3_uri + "archive/"])
 
     # scrape yesterday's results
