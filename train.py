@@ -5,6 +5,7 @@ import sys
 import pandas as pd
 
 from sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier
+from sklearn.externals import joblib
 
 from models.moneyline import MoneylineClassifier
 from models.preprocess import PreprocessBoxscore
@@ -33,21 +34,21 @@ GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
   model=GBR_spread)
 SR.train()
-pickle.dump(SR, open("resources/SR.pkl", "wb"))
+joblib.dump(SR, "resources/SR.pkl")
 
 X_total, y_total = pp.total()
 GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
   model=GBR_total)
 TR.train()
-pickle.dump(TR, open("resources/TR.pkl", "wb"))
+joblib.dump(TR, "resources/TR.pkl")
 
 X_moneyline, y_moneyline = pp.moneyline()
 GBC_moneyline = GradientBoostingClassifier(**MONEYLINE_PARAMS)
 ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
   model=GBC_moneyline)
 ML.train()
-pickle.dump(ML, open("resources/ML.pkl", "wb"))
+joblib.dump(ML, "resources/ML.pkl")
 
 # record cv scores
 sr_mae = -1*SR.cv_score(n_folds=5)

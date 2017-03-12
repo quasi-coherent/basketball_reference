@@ -4,6 +4,9 @@ import pickle
 import sys
 import pandas as pd
 
+from sklearn.externals import joblib
+
+from models.preprocess import PreprocessBoxscore
 from util.util import prepare_dates
 
 try:
@@ -14,15 +17,15 @@ except IndexError:
 
 upcoming_games = "upcoming_games_" + today + ".json"
 
-if not os.path.isfile("tmp/%s.json" % upcoming_games):
-  sys.stdout.write("Matchups for %s haven't been scraped yet..." % today)
+if not os.path.isfile("tmp/%s" % upcoming_games):
+  sys.stdout.write("upcoming_games_%s.json doesn't exist..." % today)
   sys.exit(1)
 
 # load already trained models
 try:
-  SR = pickle.load(open("models/SR.pkl", "rb"))
-  TR = pickle.load(open("models/TR.pkl", "rb"))
-  ML = pickle.load(open("models/ML.pkl", "rb"))
+  SR = joblib.load("resources/SR.pkl")
+  TR = joblib.load("resources/TR.pkl")
+  ML = joblib.load("resources/ML.pkl")
 except IOError:
   sys.stdout.write("Pickled models don't exist...")
   sys.exit(1)
