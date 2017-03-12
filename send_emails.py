@@ -14,8 +14,8 @@ except IndexError:
 
 today, _, _ = prepare_dates(sys.argv[1])
 
-if not os.path.isfile("tmp/%s.json" % today):
-  sys.stdout.write("Matchups for %s haven't been scraped yet..." % today)
+if not os.path.isfile("tmp/predictions_%s.csv" % today):
+  sys.stdout.write("Predictions for %s haven't been made yet..." % today)
   sys.exit(1)
 
 # read in and prepare prediction/metrics dfs
