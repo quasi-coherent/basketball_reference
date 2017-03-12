@@ -15,9 +15,9 @@ except IndexError:
   sys.stdout.write("Usage: python predict.py date")
   sys.exit(1)
 
-upcoming_games = "upcoming_games_" + today + ".json"
+upcoming_games = "upcoming_games_" + today
 
-if not os.path.isfile("tmp/%s" % upcoming_games):
+if not os.path.isfile("tmp/%s.json" % upcoming_games):
   sys.stdout.write("upcoming_games_%s.json doesn't exist..." % today)
   sys.exit(1)
 

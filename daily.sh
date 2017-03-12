@@ -10,6 +10,9 @@ for f in `ls data`; do cp data/$f archive/`date +'%Y%m%d' --date='-2 days'`_$f; 
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Scraping yesterday's games..."
 ./scrape_daily_boxscores.py $YESTERDAY 2>&1
 
+echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Scraping today's matchups..."
+./scrape_upcoming.py $TODAY 2>&1
+
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Fetching trained models..."
 aws s3 sync s3://donohue/nba/models/ resources/ 2>&1
 
