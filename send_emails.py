@@ -19,6 +19,7 @@ if not os.path.isfile("tmp/predictions_%s.csv" % today):
   sys.exit(1)
 
 # read in and prepare prediction/metrics dfs
+project_dir = os.environ["PROJECT_DIR"]
 predictions = pd.read_csv(project_dir + "tmp/predictions_%s.csv" % today)
 predictions["date"] = pd.to_datetime(predictions["date"])
 predictions = predictions.sort_values(by="date").reset_index(drop=True)
