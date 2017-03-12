@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e -x 
 
-TODAY=date +"%Y%m%d"
-YESTERDAY=date +"%Y%m%d" -d "yesterday"
+TODAY=$(date +"%Y%m%d")
+YESTERDAY=$(date +"%Y%m%d" -d "yesterday")
 
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Archiving data directory..."
 for f in `ls data`; do cp data/$f archive/`date +'%Y%m%d' --date='-2 days'`_$f; done
