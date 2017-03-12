@@ -4,7 +4,7 @@ import os
 import sys
 import pandas as pd
 
-from util.util import send_emails, prepare_dates
+from util.util import send_email, prepare_dates
 
 try:
   print sys.argv[1]
