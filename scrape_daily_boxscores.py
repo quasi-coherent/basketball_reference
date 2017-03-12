@@ -20,6 +20,6 @@ launch_spider(spider_name="advanced_boxscore",
 
 all_df = pd.read_json(project_dir + "data/" + all_boxscores, lines=True)
 daily_df = pd.read_json(project_dir + 
-  "tmp/%s.json" % "advanced_boxscore" + "_" + today, lines=True)
+  "tmp/%s.json" % ("advanced_boxscore" + "_" + today), lines=True)
 merged = pd.concat([all_df, daily_df]).drop_duplicates()
 merged.to_json("data/" + all_boxscores, lines=True, orient="records")

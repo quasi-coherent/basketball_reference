@@ -38,7 +38,7 @@ path = project_dir + "data/" + all_boxscores
 pp = PreprocessBoxscore(path, season)
 
 # predict on today's games
-upcoming_games_df = pd.read_json(project_dir + "tmp/%s" % upcoming_games, lines=True)
+upcoming_games_df = pd.read_json(project_dir + "tmp/%s.json" % upcoming_games, lines=True)
 predictions = []
 for _, row in upcoming_games_df.iterrows():
   date = row.get("date")
