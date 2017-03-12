@@ -1,4 +1,5 @@
 *.pyc
+*.pkl
 .empty
 .DS_Store
 1MB.dat
