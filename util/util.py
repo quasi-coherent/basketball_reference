@@ -8,7 +8,6 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-
 def send_email(send_from, send_to, subject, text):
   assert isinstance(send_to, list)
   msg = MIMEMultipart()
@@ -26,21 +25,15 @@ def send_email(send_from, send_to, subject, text):
 def launch_spider(spider_name, season, month, project_dir, data_dir, today=""):
   if today:
     name = spider_name + "_" + today + ".json"
-    subprocess.call(["scrapy", "crawl", spider_name,
-      "-a", "season=%s" % season, 
-      "-a", "month=%s" % month,
-      "-a" , "today=%s" % today,
-      "--set", "FEED_URI=%s%s%s" % (project_dir, data_dir, name),
-      "--set", "FEED_FORMAT=jsonlines"],
-      cwd=project_dir + "scrapers/" + spider_name +"/")
   else:
     name = season + "_" + month + ".json"
-    subprocess.call(["scrapy", "crawl", spider_name,
-      "-a", "season=%s" % season, 
-      "-a", "month=%s" % month,
-      "--set", "FEED_URI=%s%s%s" % (project_dir, data_dir, name),
-      "--set", "FEED_FORMAT=jsonlines"],
-      cwd=project_dir + "scrapers/" + spider_name +"/")
+  subprocess.call(["scrapy", "crawl", spider_name,
+    "-a", "season=%s" % season, 
+    "-a", "month=%s" % month,
+    "-a" , "today=%s" % today,
+    "--set", "FEED_URI=%s%s%s" % (project_dir, data_dir, name),
+    "--set", "FEED_FORMAT=jsonlines"],
+    cwd=project_dir + "scrapers/" + spider_name +"/")
 
 def prepare_dates(date):
   try:

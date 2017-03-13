@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import datetime
 import os
 import pickle
 import sys
@@ -14,11 +15,8 @@ from models.params import *
 
 from util.util import prepare_dates
 
-try:
-  _, _, season = prepare_dates(sys.argv[1])
-except IndexError:
-  sys.stdout.write("Usage: python predict.py date")
-  sys.exit(1)
+now = datetime.datetime.now()
+season = now.year if now.month in range(1, 7) else now.year + 1
 
 # inputs
 project_dir = os.environ["PROJECT_DIR"]
