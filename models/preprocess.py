@@ -55,16 +55,17 @@ class PreprocessBoxscore(object):
     
   @staticmethod
   def get_averages(df, n_last=None):
-    return df.sort_values(by="date").tail(n_last).mean() if n_last else df.mean()
+    if n_last:
+      return df.sort_values(by="date").tail(n_last).drop(["team", "date"], axis=1).mean()
+    else:
+      return df.drop(["team", "date"], axis=1).mean()
 
   def input(self, home_team, away_team, scale_features=False):
     home_df, away_df = self.split_home_and_away(self.season.copy())
     home_df = home_df.drop("score", axis=1)
     away_df = away_df.drop("score", axis=1)
-    home_team_df = pd.concat([home_df[home_df["team"] == home_team], 
-          away_df[away_df["team"] == home_team]]).drop(["team", "date"], axis=1)
-    away_team_df = pd.concat([home_df[home_df["team"] == away_team],
-          away_df[away_df["team"] == away_team]]).drop(["team", "date"], axis=1)
+    home_team_df = pd.concat([home_df[home_df["team"] == home_team], away_df[away_df["team"] == home_team]])
+    away_team_df = pd.concat([home_df[home_df["team"] == away_team], away_df[away_df["team"] == away_team]])
     home_season, home_last_ten, home_last_five, home_last_three, home_last_one, home_at_home = \
       self.get_averages(home_team_df), self.get_averages(home_team_df, 10), self.get_averages(home_team_df, 5), self.get_averages(home_team_df, 3), self.get_averages(home_team_df, 1),\
       self.get_averages(home_df[home_df["team"] == home_team].drop(["team", "date"], axis=1))
