@@ -72,7 +72,7 @@ class PreprocessBoxscore(object):
     away_season, away_last_ten, away_last_five, away_last_three, away_last_one, away_at_away = \
       self.get_averages(away_team_df), self.get_averages(away_team_df, 10), self.get_averages(away_team_df, 5), self.get_averages(away_team_df, 3), self.get_averages(home_team_df, 1),\
       self.get_averages(away_df[away_df["team"] == away_team])
-    home_input = 0.1*home_season + 0.2*home_last_ten + 0.3*home_last_five + 0.2*home_last_three + 0.1*home_last_one + 0.1*home_at_home
-    away_input = 0.1*away_season + 0.2*away_last_ten + 0.3*home_last_five + 0.2*away_last_three + 0.1*away_last_one + 0.1*away_at_away
+    home_input = 0.1*home_season + 0.15*home_last_ten + 0.3*home_last_five + 0.25*home_last_three + 0.1*home_last_one + 0.1*home_at_home
+    away_input = 0.1*away_season + 0.15*away_last_ten + 0.3*home_last_five + 0.25*away_last_three + 0.1*away_last_one + 0.1*away_at_away
     input_ = away_input.append(home_input)
     return scale(input_.values.reshape(1, -1)) if scale_features else input_.values.reshape(1, -1)
