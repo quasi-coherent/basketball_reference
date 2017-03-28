@@ -27,3 +27,12 @@ MONEYLINE_PARAMS = {
   "max_features": 8,
   "subsample": 0.8
   } # 10-fold cv acc = .95740714851577424
+
+WEIGHTS = {
+  "season": 0.00,
+  "last_ten": 0.15,  
+  "last_five": 0.40,
+  "last_three": 0.30,
+  "last_one": 0.10,
+  "hca": 0.10
+}
