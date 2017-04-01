@@ -26,7 +26,7 @@ def launch_spider(spider_name, season, month, project_dir, data_dir, today=""):
   if today:
     name = spider_name + "_" + today + ".json"
   else:
-    name = season + "_" + month + ".json"
+    name = str(season) + "_" + month + ".json"
   subprocess.call(["scrapy", "crawl", spider_name,
     "-a", "season=%s" % season, 
     "-a", "month=%s" % month,
@@ -43,4 +43,4 @@ def prepare_dates(date):
   today = datetime.datetime.strptime(date, "%Y%m%d")
   season = today.year if today.month in range(1, 7) else now.year + 1
   month = today.strftime("%B").lower()
-  return today.strftime("%Y%m%d"), month, season
+  return today.strftime("%Y%m%d"), month, str(season)
