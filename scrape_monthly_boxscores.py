@@ -6,7 +6,7 @@ import pandas as pd
 from util.util import launch_spider, prepare_dates
 
 try:
-  _, season, month = sys.argv
+  _, season, month = prepare_dates(sys.argv[1])
 except IndexError:
   sys.stdout.write("Example usage: python scrape_monthly_boxscores.py 2017 may")
   sys.exit(1)
