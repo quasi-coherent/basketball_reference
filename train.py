@@ -29,14 +29,14 @@ pp = PreprocessBoxscore(path, season)
 # train and pickle models
 X_spread, y_spread = pp.spread()
 GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
-SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread, 
+SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread,
   model=GBR_spread)
 SR.train()
 joblib.dump(SR, "resources/SR.pkl")
 
 X_total, y_total = pp.total()
 GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
-TR = SpreadAndTotalRegressor(features=X_total, response=y_total, 
+TR = SpreadAndTotalRegressor(features=X_total, response=y_total,
   model=GBR_total)
 TR.train()
 joblib.dump(TR, "resources/TR.pkl")

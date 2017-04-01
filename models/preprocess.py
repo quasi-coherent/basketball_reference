@@ -60,7 +60,7 @@ class PreprocessBoxscore(object):
     else:
       return df.drop(["team", "date"], axis=1).mean()
 
-  def input(self, home_team, away_team, scale_features=False):
+  def input(self, home_team, away_team, weights, scale_features=False):
     home_df, away_df = self.split_home_and_away(self.season.copy())
     home_df = home_df.drop("score", axis=1)
     away_df = away_df.drop("score", axis=1)
@@ -72,7 +72,9 @@ class PreprocessBoxscore(object):
     away_season, away_last_ten, away_last_five, away_last_three, away_last_one, away_at_away = \
       self.get_averages(away_team_df), self.get_averages(away_team_df, 10), self.get_averages(away_team_df, 5), self.get_averages(away_team_df, 3), self.get_averages(home_team_df, 1),\
       self.get_averages(away_df[away_df["team"] == away_team])
-    home_input = 0.15*home_last_ten + 0.4*home_last_five + 0.3*home_last_three + 0.1*home_last_one + 0.1*home_at_home
-    away_input = 0.15*away_last_ten + 0.4*home_last_five + 0.3*away_last_three + 0.1*away_last_one + 0.1*away_at_away
+    home_input = weights["season"]*home_season + weights["last_ten"]*home_last_ten + weights["last_five"]*home_last_five \
+      + weights["last_three"]*home_last_three + weights["last_one"]*home_last_one + weights["hca"]*home_at_home
+    away_input = weights["season"]*away_season + weights["last_ten"]*away_last_ten + weights["last_five"]*home_last_five + \
+      weights["last_three"]*away_last_three + weights["last_one"]*away_last_one + weights["hca"]*away_at_away
     input_ = away_input.append(home_input)
     return scale(input_.values.reshape(1, -1)) if scale_features else input_.values.reshape(1, -1)

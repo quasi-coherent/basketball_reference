@@ -9,6 +9,8 @@ from sklearn.externals import joblib
 from models.preprocess import PreprocessBoxscore
 from util.util import prepare_dates
 
+from models.params import *
+
 try:
   today, _, season = prepare_dates(sys.argv[1])
 except IndexError:
@@ -44,11 +46,11 @@ for _, row in upcoming_games_df.iterrows():
   date = row.get("date")
   home_team = row.get("home_team")
   away_team = row.get("away_team")
-  sr_inputs = pp.input(home_team, away_team)
-  tr_inputs = pp.input(home_team, away_team)
-  ml_inputs = pp.input(home_team, away_team)
-  sr_pred = SR.predict(sr_inputs)
-  tr_pred = TR.predict(tr_inputs)
+  sr_inputs = pp.input(home_team, away_team, WEIGHTS)
+  tr_inputs = pp.input(home_team, away_team, WEIGHTS)
+  ml_inputs = pp.input(home_team, away_team, WEIGHTS)
+  sr_pred = SR.predict(sr_inputs) 
+  tr_pred = TR.predict(tr_inputs) 
   ml_pred = ML.predict(ml_inputs)
   ml_pred_prob = ML.predict_prob(ml_inputs)
   predictions.append([date, home_team, away_team, sr_pred, tr_pred, ml_pred, ml_pred_prob[0], ml_pred_prob[1]])
