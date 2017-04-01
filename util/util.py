@@ -43,4 +43,4 @@ def prepare_dates(date):
   today = datetime.datetime.strptime(date, "%Y%m%d")
   season = today.year if today.month in range(1, 7) else now.year + 1
   month = today.strftime("%B").lower()
-  return today.strftime("%Y%m%d"), month, str(season)
+  return today.strftime("%Y%m%d"), month, season
