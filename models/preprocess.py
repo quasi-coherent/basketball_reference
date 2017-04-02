@@ -5,8 +5,7 @@ from sklearn.preprocessing import scale
 
 class PreprocessBoxscore(object):
   def __init__(self, path, season):
-    _all = pd.read_json(path, lines=True)
-    _all.date = pd.to_datetime(_all.date, yearfirst=True)
+    _all = pd.read_json(path, convert_dates=["date"], lines=True)
     start = datetime.datetime(year=season - 1, month=10, day=1)
     end = datetime.datetime(year=season, month=6, day=30)
     # avoid data leakage by dropping features that implicitly incorporate points scored
