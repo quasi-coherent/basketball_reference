@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-source /home/ubuntu/.profile
-
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Training models..."
 ./train.py 2>&1 
 
