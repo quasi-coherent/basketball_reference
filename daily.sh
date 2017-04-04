@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e -x
+set -e
 
 TODAY=$(date +"%Y%m%d")
 YESTERDAY=$(date +"%Y%m%d" -d "yesterday")
