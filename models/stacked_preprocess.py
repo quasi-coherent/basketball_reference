@@ -46,8 +46,18 @@ class StackedPreprocessor(object):
     return df.merge(self.scores, on="gid").drop("gid", axis=1)
 
   def location_average(self, window=105, min_periods=1):
-    # will be teams' season average to that point at home or away
-    return
+    home_df, away_df = self.home_and_away(self.all_boxscores.copy())
+    home_gid, away_gid = pd.DataFrame(home_df["gid"]), pd.DataFrame(away_df["gid"])
+    home_season_avg = home_gid.merge(
+      self.windowed_average(home_df.drop(["date", "gid"], axis=1), window, min_periods),
+      left_index=True, right_index=True)
+    away_season_avg = away_gid.merge(
+      self.windowed_average(away_df.drop(["date", "gid"], axis=1), window, min_periods),
+      left_index=True, right_index=True)
+    df = home_season_avg.merge(away_season_avg, on="gid", suffixes=("_home", "_away"))\
+      .dropna()
+    df.columns = map(lambda col: col.split("_")[1] + "_" + col.split("_")[0] if col != "gid" else col, df.columns)
+    return df.merge(self.scores, on="gid").drop("gid", axis=1)
 
   def moneyline_train(self, window, min_periods=None):
     last_n = self.last_n_average(window, min_periods)
