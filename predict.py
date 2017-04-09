@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import os
-import pickle
 import sys
 import pandas as pd
 

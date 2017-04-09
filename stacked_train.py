@@ -29,13 +29,13 @@ for window in windows:
   SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread,
   model=GBR_spread)
   SR.train()
-  joblib.dump("resources/SR/SR_%s.pkl" % window)
+  joblib.dump(SR, "resources/SR/SR_%s.pkl" % window)
 
 X_spread, y_spread = pp.spread_train(location=True)
 SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread,
   model=GBR_spread)
 SR.train()
-joblib.dump("resources/SR/SR_location.pkl")
+joblib.dump(SR, "resources/SR/SR_location.pkl")
 
 
 # total
@@ -48,13 +48,13 @@ for window in windows:
   TR = SpreadAndTotalRegressor(features=X_total, response=y_total,
   model=GBR_total)
   TR.train()
-  joblib.dump("resources/TR/TR_%s.pkl" % window)
+  joblib.dump(TR, "resources/TR/TR_%s.pkl" % window)
 
 X_total, y_total = pp.total_train(location=True)
 TR = SpreadAndTotalRegressor(features=X_total, response=y_total,
   model=GBR_total)
 TR.train()
-joblib.dump("resources/TR/TR_location.pkl")
+joblib.dump(TR, "resources/TR/TR_location.pkl")
 
 
 # moneyline
@@ -67,10 +67,10 @@ for window in windows:
   ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
     model=GBC_moneyline)
   ML.train()
-  joblib.dump("resources/ML/ML_%s.pkl" % window)
+  joblib.dump(ML, "resources/ML/ML_%s.pkl" % window)
 
 X_moneyline, y_moneyline = pp.moneyline_train(location=True)
 ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
   model=GBC_moneyline)
 ML.train()
-joblib.dump("resources/ML/ML_location.pkl")
+joblib.dump(ML, "resources/ML/ML_location.pkl")
