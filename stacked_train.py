@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+import os
+import sys
+import pandas as pd
+
+from sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier
+from sklearn.externals import joblib
+
+from models.moneyline import MoneylineClassifier
+from models.spread_and_total import SpreadAndTotalRegressor
+from models.stacked_preprocess import StackedPreprocessor
+from models.params import *
+
+project_dir = os.environ["PROJECT_DIR"]
+all_boxscores = os.environ["ALL_BOXSCORES"]
+path = project_dir + "data/" + all_boxscores
+
+windows = [1, 3, 5, 10, 105]
+pp = StackedPreprocessor(path)
+
+
+# spread
+GBR_spread = GradientBoostingRegressor(**SPREAD_PARAMS)
+for window in windows:
+  min_periods = None
+  if window == 105:
+    min_periods = 1
+  X_spread, y_spread = pp.spread_train(window, min_periods)
+  SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread,
+  model=GBR_spread)
+  SR.train()
+  joblib.dump("resources/SR/SR_%s.pkl" % window)
+
+X_spread, y_spread = pp.spread_train(location=True)
+SR = SpreadAndTotalRegressor(features=X_spread, response=y_spread,
+  model=GBR_spread)
+SR.train()
+joblib.dump("resources/SR/SR_location.pkl")
+
+
+# total
+GBR_total = GradientBoostingRegressor(**TOTAL_PARAMS)
+for window in windows:
+  min_periods = None
+  if window == 105:
+    min_periods = 1
+  X_total, y_total = pp.total_train(window, min_periods)
+  TR = SpreadAndTotalRegressor(features=X_total, response=y_total,
+  model=GBR_total)
+  TR.train()
+  joblib.dump("resources/TR/TR_%s.pkl" % window)
+
+X_total, y_total = pp.total_train(location=True)
+TR = SpreadAndTotalRegressor(features=X_total, response=y_total,
+  model=GBR_total)
+TR.train()
+joblib.dump("resources/TR/TR_location.pkl")
+
+
+# moneyline
+GBC_moneyline = GradientBoostingClassifier(**MONEYLINE_PARAMS)
+for window in windows:
+  min_periods = None
+  if window == 105:
+    min_periods = 1
+  X_moneyline, y_moneyline = pp.moneyline_train(window, min_periods)
+  ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
+    model=GBC_moneyline)
+  ML.train()
+  joblib.dump("resources/ML/ML_%s.pkl" % window)
+
+X_moneyline, y_moneyline = pp.moneyline_train(location=True)
+ML = MoneylineClassifier(features=X_moneyline, response=y_moneyline,
+  model=GBC_moneyline)
+ML.train()
+joblib.dump("resources/ML/ML_location.pkl")
