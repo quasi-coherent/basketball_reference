@@ -6,7 +6,7 @@ SPREAD_PARAMS = {
   "min_samples_leaf": 16,
   "max_features": 18,
   "subsample": 0.8
-  } # 10-fold cv mae = 2.1364707559295621
+  }
 
 TOTAL_PARAMS = {
   "n_estimators": 14383, 
@@ -16,7 +16,7 @@ TOTAL_PARAMS = {
   "min_samples_leaf": 7,
   "max_features": 21,
   "subsample": 0.8
-  } # 10-fold cv mae = 6.55831769692
+  }
 
 MONEYLINE_PARAMS = {
   "n_estimators": 5734, 
@@ -26,7 +26,7 @@ MONEYLINE_PARAMS = {
   "min_samples_leaf": 8,
   "max_features": 8,
   "subsample": 0.8
-  } # 10-fold cv acc = .95740714851577424
+  }
 
 WEIGHTS = {
   "season": 0.00,

@@ -27,7 +27,7 @@ metrics = pd.read_csv(project_dir + "data/metrics.csv")
 
 # send email with predictions/historical metrics
 send_from = "d.michael.donohue@gmail.com"
-send_to = ["d.michael.donohue@gmail.com"]#, "jesse.prestwoodtaylor@gmail.com"]
+send_to = ["d.michael.donohue@gmail.com", "jesse.prestwoodtaylor@gmail.com"]
 subject = "NBA Predictions %s" % datetime.datetime.strptime(today, "%Y%m%d").strftime("%m-%d-%Y")
 text = "Predictions for games happening on %s (all times Eastern): <br><br>" % datetime.datetime.strptime(today, "%Y%m%d").strftime("%m-%d-%Y")
 text += predictions.to_html()

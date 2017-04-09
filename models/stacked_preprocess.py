@@ -78,6 +78,4 @@ class StackedPreprocessor(object):
     last_n["total"] = last_n["home_score"] + last_n["away_score"]
     last_n["total"] = last_n["total"].apply(float)
     last_n = last_n.drop(["home_score", "away_score"], axis=1)
-    return last_n.ix[:, last_n.columns != "total"], last_n["total"]    
-
-
+    return last_n.ix[:, last_n.columns != "total"], last_n["total"]

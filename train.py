@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import datetime
 import os
-import pickle
 import sys
 import pandas as pd
 
@@ -12,8 +11,6 @@ from models.moneyline import MoneylineClassifier
 from models.preprocess import PreprocessBoxscore
 from models.spread_and_total import SpreadAndTotalRegressor
 from models.params import *
-
-from util.util import prepare_dates
 
 now = datetime.datetime.now()
 season = now.year if now.month in range(1, 7) else now.year + 1
