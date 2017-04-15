@@ -59,23 +59,32 @@ class StackedPreprocessor(object):
     df.columns = map(lambda col: col.split("_")[1] + "_" + col.split("_")[0] if col != "gid" else col, df.columns)
     return df.merge(self.scores, on="gid").drop("gid", axis=1)
 
-  def moneyline_train(self, window, min_periods=None):
-    last_n = self.last_n_average(window, min_periods)
+  def moneyline_train(self, window, min_periods=None, location=False):
+    if location:
+      last_n = self.location_average(window, min_periods)
+    else:
+      last_n = self.last_n_average(window, min_periods)
     last_n["outcome"] = last_n["home_score"] - last_n["away_score"] > 0
     last_n["outcome"] = last_n["outcome"].apply(int)
-    last_n = last_n.drop(["home_score", "away_score"], axis=1)
+    last_n = last_n.drop(["home_team", "home_score", "away_team", "away_score", "date"], axis=1)    
     return last_n.ix[:, last_n.columns != "outcome"], last_n["outcome"]
 
-  def spread_train(self, window, min_periods=None):
-    last_n = self.last_n_average(window, min_periods)
+  def spread_train(self, window, min_periods=None, location=False):
+    if location:
+      last_n = self.location_average(window, min_periods)
+    else:
+      last_n = self.last_n_average(window, min_periods)
     last_n["spread"] = last_n["home_score"] - last_n["away_score"]
     last_n["spread"] = last_n["spread"].apply(float)
-    last_n = last_n.drop(["home_score", "away_score"], axis=1)    
+    last_n = last_n.drop(["home_team", "home_score", "away_team", "away_score", "date"], axis=1)    
     return last_n.ix[:, last_n.columns != "spread"], last_n["spread"]
 
-  def total_train(self, window, min_periods=None):
-    last_n = self.last_n_average(window, min_periods)
+  def total_train(self, window, min_periods=None, location=False):
+    if location:
+      last_n = self.location_average(window, min_periods)
+    else:
+      last_n = self.last_n_average(window, min_periods)
     last_n["total"] = last_n["home_score"] + last_n["away_score"]
     last_n["total"] = last_n["total"].apply(float)
-    last_n = last_n.drop(["home_score", "away_score"], axis=1)
+    last_n = last_n.drop(["home_team", "home_score", "away_team", "away_score", "date"], axis=1)    
     return last_n.ix[:, last_n.columns != "total"], last_n["total"]
