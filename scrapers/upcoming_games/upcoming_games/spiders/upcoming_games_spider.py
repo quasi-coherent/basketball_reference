@@ -19,7 +19,11 @@ class UpcomingGamesSpider(Spider):
     for game in response.xpath('//*[@id="schedule"]/tbody//tr').extract():
       soup = BeautifulSoup(game, "html.parser")
       date = soup.th.text
-      if datetime.strptime(date, "%a, %b %d, %Y") == datetime.strptime(self.today, "%Y%m%d"):
+      try:
+        dt = datetime.strptime(date, "%a, %b %d, %Y")
+      except ValueError:
+        continue
+      if dt == datetime.strptime(self.today, "%Y%m%d"):
         item = UpcomingGamesItem()
         time = soup.find("td", attrs={"data-stat": "game_start_time"}).text
         date_time = " ".join([date, time])
