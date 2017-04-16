@@ -57,7 +57,7 @@ class StackedPreprocessor(object):
     df = home_season_avg.merge(away_season_avg, on="gid", suffixes=("_home", "_away"))\
       .dropna()
     df.columns = map(lambda col: col.split("_")[1] + "_" + col.split("_")[0] if col != "gid" else col, df.columns)
-    return df.merge(self.scores, on="gid").drop("gid", axis=1)
+    return df.merge(self.scores, on="gid").drop(["home_season", "away_season", "gid"], axis=1)
 
   def moneyline_train(self, window, min_periods=None, location=False):
     if location:

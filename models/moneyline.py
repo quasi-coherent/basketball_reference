@@ -25,3 +25,6 @@ class MoneylineClassifier(object):
 
   def predict_prob(self, inputs):
     return self.model.predict_proba(inputs)[0]
+
+  def predict_historical(self):
+    return self.model.predict(self.features)
