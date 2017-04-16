@@ -26,5 +26,5 @@ class SpreadAndTotalRegressor(object):
   def predict(self, inputs):
     return self.model.predict(inputs)[0]
 
-  def predict_historical(self)
+  def predict_historical(self):
     return self.model.predict(self.features)
