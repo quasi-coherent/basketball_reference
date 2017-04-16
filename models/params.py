@@ -30,9 +30,9 @@ MONEYLINE_PARAMS = {
 
 WEIGHTS = {
   "season": 0.00,
-  "last_ten": 0.15,  
-  "last_five": 0.40,
-  "last_three": 0.30,
+  "last_ten": 0.266666666667,  
+  "last_five": 0.266666666667,
+  "last_three": 0.266666666667,
   "last_one": 0.10,
   "hca": 0.10
 }
