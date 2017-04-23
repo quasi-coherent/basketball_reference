@@ -25,8 +25,11 @@ echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Making predictions..."
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Sending emails..."
 ./send_emails.py $TODAY 2>&1
 
-echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Syncing data directory with s3..."
-aws s3 sync data/ s3://donohue/nba/data/ 2>&1 
+echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Syncing data directory with s3 and remote repo..."
+aws s3 sync data/ s3://donohue/nba/data/ 2>&1
+git add data/
+git commit -m "New data"
+git push origin master
 
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Cleaning up tmp dir..."
 rm tmp/* 2>&1 
