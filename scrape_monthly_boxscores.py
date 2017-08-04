@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import os
 import sys
-import pandas as pd
 
 from util.util import launch_spider, prepare_dates
 

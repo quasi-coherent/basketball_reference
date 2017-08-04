@@ -21,7 +21,7 @@ class UpcomingGamesSpider(Spider):
       date = soup.th.text
       try:
         dt = datetime.strptime(date, "%a, %b %d, %Y")
-      except ValueError:
+      except ValueError: # skip rows that are headers
         continue
       if dt == datetime.strptime(self.today, "%Y%m%d"):
         item = UpcomingGamesItem()
