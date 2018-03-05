@@ -13,7 +13,7 @@ def send_email(send_from, send_to, subject, text):
   try:
     assert isinstance(send_to, list)
   except AssertionError:
-    sys.stdout.write("The parameter `send_to` should be a list.")
+    sys.stdout.write("The parameter `send_to` should be a list.\n")
     sys.exit(1)
   msg = MIMEMultipart()
   msg["From"] = send_from
@@ -44,7 +44,7 @@ def prepare_dates(date):
   try:
     datetime.datetime.strptime(date, "%Y%m%d")
   except ValueError:
-    sys.stdout.write("Improper datetime format: %s. Expected: YYYYMMDD." % date)
+    sys.stdout.write("Improper datetime format: %s. Expected: YYYYMMDD.\n" % date)
     sys.exit(1)
   today = datetime.datetime.strptime(date, "%Y%m%d")
   season = today.year if today.month in range(1, 7) else now.year + 1

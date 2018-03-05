@@ -4,7 +4,7 @@ from advanced_boxscore.items import AdvancedBoxscoreItem
 from advanced_boxscore.constants import TEAM_TABLE
 
 class AdvancedBoxscoreSpider(Spider):
-  _root = "http://www.basketball-reference.com"
+  _root = "https://www.basketball-reference.com"
   name = "advanced_boxscore"
 
   def __init__(self, season, month, today="", *args, **kwargs):

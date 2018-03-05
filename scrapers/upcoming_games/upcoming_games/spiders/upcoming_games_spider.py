@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from upcoming_games.items import UpcomingGamesItem
 
 class UpcomingGamesSpider(Spider):
-  _root = "http://www.basketball-reference.com"
+  _root = "https://www.basketball-reference.com"
   name = "upcoming_games"
 
   def __init__(self, season, month, today, *args, **kwargs):
