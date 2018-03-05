@@ -11,5 +11,11 @@ python concat_results.py
 
 mv data/all_boxscores_2001-2018.json /home/ubuntu/
 mv all_boxscores_2001-2018_tmp.json all_boxscores_2001-2018.json; mv all_boxscores_2001-2018.json data/
+
+declare -a dates=("20180301" "20180302" "20180303" "20180304")
+for date in "${dates[@]}"; do
+  python scrape_daily_boxscores.py $date
+done
+
 aws s3 sync data/ s3://donohue/nba/data/
 git add data/; git commit -m "New data"; git push
