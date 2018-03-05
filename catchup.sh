@@ -1,8 +1,13 @@
 #!/bin/bash
 
-declare -a months=(10 11 12 01 02)
+declare -a months17=(10 11 12)
 
-for month in "${months[@]}"; do
+for month in "${months17[@]}"; do
+  python scrape_monthly_boxscores.py "2017${month}01"
+done
+
+declare -a months18=(01 02)
+for month in "${months18[@]}"; do
   python scrape_monthly_boxscores.py "2018${month}01"
 done
 

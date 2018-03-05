@@ -47,6 +47,6 @@ def prepare_dates(date):
     sys.stdout.write("Improper datetime format: %s. Expected: YYYYMMDD.\n" % date)
     sys.exit(1)
   today = datetime.datetime.strptime(date, "%Y%m%d")
-  season = today.year if today.month in range(1, 7) else now.year + 1
+  season = today.year if today.month in range(1, 7) else today.year + 1
   month = today.strftime("%B").lower()
   return today.strftime("%Y%m%d"), month, season
