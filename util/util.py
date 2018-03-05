@@ -2,6 +2,7 @@ import datetime
 import os
 import smtplib
 import subprocess
+import sys
 
 from email.utils import COMMASPACE, formatdate
 from email.mime.application import MIMEApplication
@@ -9,7 +10,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 def send_email(send_from, send_to, subject, text):
-  assert isinstance(send_to, list)
+  try:
+    assert isinstance(send_to, list)
+  except AssertionError:
+    sys.stdout.write("The parameter `send_to` should be a list.")
+    sys.exit(1)
   msg = MIMEMultipart()
   msg["From"] = send_from
   msg["To"] = COMMASPACE.join(send_to)
@@ -39,7 +44,8 @@ def prepare_dates(date):
   try:
     datetime.datetime.strptime(date, "%Y%m%d")
   except ValueError:
-    print "Improper datetime format: %s. Expected: YYYYMMDD." % date
+    sys.stdout.write("Improper datetime format: %s. Expected: YYYYMMDD." % date)
+    sys.exit(1)
   today = datetime.datetime.strptime(date, "%Y%m%d")
   season = today.year if today.month in range(1, 7) else now.year + 1
   month = today.strftime("%B").lower()

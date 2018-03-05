@@ -34,3 +34,4 @@ class AdvancedBoxscoreItem(Item):
   away_tov = Field(serializer=float)
   away_ortg = Field(serializer=float)
   away_drtg = Field(serializer=float)
+  
