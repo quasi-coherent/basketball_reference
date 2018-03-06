@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Syncing data dir..."
+aws s3 sync s3://donohue/nba/data/ data/
+
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Training models..."
 ./train.py 2>&1 
 
