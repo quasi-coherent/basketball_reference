@@ -38,7 +38,7 @@ def launch_spider(spider_name, season, month, project_dir, data_dir, today=""):
     "-a" , "today=%s" % today,
     "--set", "FEED_URI=%s%s%s" % (project_dir, data_dir, name),
     "--set", "FEED_FORMAT=jsonlines"],
-    cwd=project_dir + "scrapers/" + spider_name +"/", shell=True)
+    cwd=project_dir + "scrapers/" + spider_name +"/")
 
 def prepare_dates(date):
   try:
