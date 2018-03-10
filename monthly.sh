@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+source /home/ubuntu/.bash_profile
+
 YESTERDAY=$(date +"%Y%m%d" -d "yesterday")
 
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Scraping monthly data for archiving..."
