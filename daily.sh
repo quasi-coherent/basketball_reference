@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-source /home/ubuntu/.profile
-
 TODAY=$(date +"%Y%m%d")
 YESTERDAY=$(date +"%Y%m%d" -d "yesterday")
 
