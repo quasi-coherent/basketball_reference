@@ -4,4 +4,5 @@
 archive/
 tmp/
 logs/
+data/
 .DS_Store
