@@ -27,7 +27,7 @@ TEAM_TABLE = {
   "New Orleans Pelicans": "nop",
   "New York Knicks": "nyk",
   "Orlando Magic": "orl",
-  "Philadelphia 76ers": "phi", 
+  "Philadelphia 76ers": "phi",
   "Phoenix Suns": "pho",
   "Sacramento Kings": "sac",
   "San Antonio Spurs": "sas",

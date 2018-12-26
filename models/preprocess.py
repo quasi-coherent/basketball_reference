@@ -51,7 +51,7 @@ class PreprocessBoxscore(object):
     home_df.columns = map(lambda col: col.replace("home_", ""), home_df.columns)
     away_df.columns = map(lambda col: col.replace("away_", ""), away_df.columns)
     return home_df, away_df
-    
+
   @staticmethod
   def get_averages(df, n_last=None):
     if n_last:

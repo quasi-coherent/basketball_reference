@@ -19,7 +19,7 @@ class MoneylineClassifier(object):
   def train(self):
     self.model.fit(self.features, self.response)
     return self.model
-    
+
   def predict(self, inputs):
     return self.model.predict(inputs)[0]
 

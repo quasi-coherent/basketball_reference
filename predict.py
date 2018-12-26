@@ -48,14 +48,14 @@ for _, row in upcoming_games_df.iterrows():
   sr_inputs = pp.input(home_team, away_team, WEIGHTS)
   tr_inputs = pp.input(home_team, away_team, WEIGHTS)
   ml_inputs = pp.input(home_team, away_team, WEIGHTS)
-  sr_pred = SR.predict(sr_inputs) 
-  tr_pred = TR.predict(tr_inputs) 
+  sr_pred = SR.predict(sr_inputs)
+  tr_pred = TR.predict(tr_inputs)
   ml_pred = ML.predict(ml_inputs)
   ml_pred_prob = ML.predict_prob(ml_inputs)
   predictions.append([date, home_team, away_team, sr_pred, tr_pred, ml_pred, ml_pred_prob[0], ml_pred_prob[1]])
 
 # write to file
-pred_df = pd.DataFrame(predictions, 
+pred_df = pd.DataFrame(predictions,
     columns=["date", "home_team", "away_team", "spread", "total", "moneyline", "away_prob", "home_prob"])\
   .drop_duplicates(subset=["date", "home_team", "away_team"])
 pred_df.to_csv(project_dir + "tmp/predictions_%s.csv" % today, index=False)

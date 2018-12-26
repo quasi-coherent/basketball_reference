@@ -12,6 +12,6 @@ except IndexError:
 
 project_dir = os.environ["PROJECT_DIR"]
 
-launch_spider(spider_name="advanced_boxscore", 
+launch_spider(spider_name="advanced_boxscore",
   season=season, month=month,
   project_dir=project_dir, data_dir="tmp/")

@@ -29,6 +29,6 @@ git commit -m "New data"
 git push origin master
 
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Cleaning up tmp dir..."
-rm tmp/* 2>&1 
+rm tmp/* 2>&1
 
 echo "$(date +"%Y-%m-%d %H:%M:%S %Z"): Done!"
