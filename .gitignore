@@ -6,3 +6,7 @@ tmp/
 logs/
 data/
 .DS_Store
+bin/
+.Python
+include/
+lib/
