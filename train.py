@@ -7,10 +7,11 @@ import pandas as pd
 from sklearn.ensemble import GradientBoostingRegressor, GradientBoostingClassifier
 from sklearn.externals import joblib
 
-from models.moneyline import MoneylineClassifier
-from models.preprocess import PreprocessBoxscore
-from models.spread_and_total import SpreadAndTotalRegressor
 from models.params import *
+from models.preprocess import PreprocessBoxscore
+from models.sklearn.moneyline import MoneylineClassifier
+from models.sklearn.spread_and_total import SpreadAndTotalRegressor
+
 
 season = now.year if now.month in range(1, 7) else now.year + 1
 
