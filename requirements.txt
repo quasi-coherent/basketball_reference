@@ -49,7 +49,7 @@ tensorboard==1.12.1
 tensorflow>=1.12.1
 tensorflow-gpu==1.15.4
 termcolor==1.1.0
-Twisted==18.9.0
+Twisted>=20.3.0
 w3lib==1.19.0
 Werkzeug==0.15.3
 zope.interface==4.6.0
